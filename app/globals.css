@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{ color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body { @apply bg-bg text-fg; }
+.container { @apply max-w-6xl mx-auto px-4; }
+.card { @apply bg-paper border border-line rounded-2xl p-5; }
+.h { @apply font-extrabold tracking-tight; }
+.sub { @apply text-sm text-slate-400; }
+.kbd { @apply px-2 py-0.5 rounded border border-line bg-note text-slate-300; }
+hr { @apply border-line my-4; }
+.btn { @apply inline-flex items-center gap-2 rounded-2xl border border-line bg-note px-4 py-2 hover:bg-line/30 transition; }
+.badge { @apply inline-block text-xs px-2 py-0.5 rounded-full border border-line text-slate-400; }
+
+@media (prefers-color-scheme: light){
+  body { @apply bg-bg-light text-fg-dark; }
+  .card { @apply bg-paperLight border-slate-200; }
+  .kbd { @apply bg-noteLight text-slate-700 border-slate-200; }
+  .btn { @apply bg-noteLight; }
+}
+
+/* NIMBIRU progress animation */
+@keyframes grow {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.anim-grow { animation: grow 4s ease-in-out forwards; }
