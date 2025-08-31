@@ -1,0 +1,18 @@
+{
+  "qsvg": "0.3",
+  "meta": { "title": "Witness Card A", "author": "NuZer05" },
+  "canvas": { "width": 1080, "height": 1920, "unit": "px", "viewBox": "0 0 1080 1920", "bg": "#0b1020" },
+  "phi": { "tilt": 0.000437, "goldenAngle": 137.5 },
+  "defs": {
+    "gradients": [
+      { "id":"aqua", "type":"linear", "x1":0, "y1":0, "x2":1, "y2":1, "stops":[["0%","#00eaff"],["100%","#7fffd4"]] }
+    ]
+  },
+  "layers": [
+    { "id":"base", "items":[
+      { "type":"rect", "id":"frame", "x":60, "y":60, "w":960, "h":1800, "rx":24, "fill":"none", "stroke":"#7fffd4", "strokeWidth":2 },
+      { "type":"text", "id":"t", "x":120, "y":180, "text":"SP1RL_ò-s", "font":{"family":"Inter","size":72,"weight":800}, "fill":"#e2f7ff" },
+      { "type":"path", "id":"trace", "d":"M120,300C180,200 240,220 300,320 360,420 420,460 480,380", "fill":"none", "stroke":"url(#aqua)", "strokeWidth":4 }
+    ]}
+  ]
+}
