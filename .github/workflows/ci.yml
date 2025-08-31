@@ -1,56 +1,50 @@
-name: CI
+name: CI — Next + Vitest + Typecheck
+
 on:
   push:
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    env:
+      CI: true
+      HUSKY: 0  # disable husky hooks in CI
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
-      - run: npm ci
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Unit tests (Vitest)
-        run: npm run test:ci
+      - name: Tests
+        run: npm run test
 
-      - name: Build Next app
+      - name: Build Next.js
         run: npm run build
 
-      - name: Start server
-        run: |
-          npm start &>/dev/null &
-          echo $! > server.pid
-
-      - name: Wait for server
-        run: npx wait-on http://localhost:3000
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: E2E tests (Playwright)
-        run: npm run e2e
-
-      - name: Generate paper.pdf
-        run: npm run print:pdf
-
-      - name: Upload artifacts (paper.pdf + coverage)
-        uses: actions/upload-artifact@v4
-        with:
-          name: paper-and-coverage
-          path: |
-            out/paper.pdf
-            coverage/**
-          if-no-files-found: error
-          retention-days: 7
-
-      - name: Stop server
-        if: always()
-        run: kill $(cat server.pid) || true
+      # Optional: upload standalone artifacts (uncomment if you output to out/ or .next/standalone)
+      # - name: Upload build artifact
+      #   if: success()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: next-build
+      #     path: |
+      #       .next

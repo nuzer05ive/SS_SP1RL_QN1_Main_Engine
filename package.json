@@ -14,7 +14,8 @@
     "e2e": "playwright test",
     "print:pdf": "node scripts/print-pdf.js",
     "paper": "npm run build && (\n  PORT=$( (lsof -ti :3000 >/dev/null && echo 4000) || echo 3000 )\n  echo \"🌐 Using PORT=$PORT\"\n  PAPER_URL=http://localhost:$PORT/docs/paper PORT=$PORT npm start & echo $! > .server.pid\n  npx wait-on http://localhost:$PORT\n  PAPER_URL=http://localhost:$PORT/docs/paper node scripts/print-pdf.js\n  code=$?\n  kill $(cat .server.pid) 2>/dev/null || true\n  rm -f .server.pid\n  exit $code\n)",
-    "freeport": "kill -9 $(lsof -ti :3000) 2>/dev/null || true"
+    "freeport": "kill -9 $(lsof -ti :3000) 2>/dev/null || true",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.2.0",
